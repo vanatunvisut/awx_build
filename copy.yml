@@ -1,0 +1,4 @@
+- copy:
+    src: /tmp/ansible.txt
+    dest: /tmp/test.txt
+    mode: 0644
