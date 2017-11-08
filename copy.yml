@@ -1,4 +1,8 @@
-- copy:
-    src: /tmp/ansible.txt
-    dest: /tmp/test.txt
-    mode: 0644
+---
+- name: Hello World!
+  hosts: all
+ 
+  tasks:
+ 
+  - name: Hello World!
+    shell: echo "Hi! Tower is working."
