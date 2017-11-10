@@ -2,5 +2,11 @@
 - hosts: all
   become: true
   tasks:
-        - name: "Install jq"
-          apt: pkg=jq state=installed
+        - name: Install required packages
+          apt: name={{ item }} state=present
+          with_items:
+           - sysstat
+           - gnuplot
+           - bc
+           - ntp
+           - jq
