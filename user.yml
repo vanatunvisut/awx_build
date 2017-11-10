@@ -1,0 +1,30 @@
+---
+- hosts: all
+  become: true
+  tasks:
+      - name: Create Groups
+        group:
+          gid: "{{ item.gid }}"
+          name: "{{ item.name }}"
+          state: present
+        with_items:
+          - { gid: 1010, name: wdview }
+          - { gid: 1001, name: wdadmin }
+          - { gid: 1009, name: wdftp }
+          - { gid: 996,  name: nginx }
+          - { gid: 999,  name: wildfly }
+      - name: Create Users
+        user:
+          uid: "{{ item.uid }}"
+          home: "{{ item.path }}"
+          name: "{{ item.name }}"
+          group: "{{ item.name }}"
+          shell: "{{ item.shell }}"
+          system: "{{ item.system }}"
+          createhome: "{{ item.crehome }}"
+        with_items:
+          - { uid: 1010, name: wdview,  crehome: yes, system: no,  shell: /bin/bash,         path: /home/wdview }
+          - { uid: 1001, name: wdadmin, crehome: yes, system: no,  shell: /bin/bash,         path: /home/wdadmin }
+          - { uid: 999,  name: wildfly, crehome: no,  system: yes, shell: /bin/bash,         path: /opt/stack/wildfly }
+          - { uid: 1009, name: wdftp,   crehome: yes, system: no,  shell: /usr/sbin/nologin, path: /archive }
+          - { uid: 996,  name: nginx,   crehome: no,  system: yes, shell: /usr/sbin/nologin, path: /opt/stack/nginx }

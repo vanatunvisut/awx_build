@@ -1,0 +1,17 @@
+---
+- hosts: all
+  become: true
+  tasks:
+       - name: Create WDCHAT Directory Structure
+         file:
+             path: "{{ item.path }}"
+             owner: "{{ item.owner }}"
+             group: "{{ item.owner }}"
+             state: directory
+         with_items:
+             - { owner: root,    path: /opt/stack }
+             - { owner: root,    path: /home/chroot/wdftp }
+             - { owner: wildfly, path: /upload }
+             - { owner: wildfly, path: /archive }
+             - { owner: wildfly, path: /dmaimg }
+             - { owner: wildfly, path: /dmatmp }
