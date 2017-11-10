@@ -1,0 +1,20 @@
+---
+- hosts: all
+  become: true
+  tasks:
+        - name: Create partitions
+        - parted:
+            device: /dev/vdc
+            number: 1
+            state: present
+            part_end: 50GiB
+        - parted:
+            device: /dev/vdc
+            number: 2
+            state: present
+            part_end: 50GiB
+        - parted:
+            device: /dev/vdc
+            number: 3
+            state: present
+            part_end: 50GiB  
