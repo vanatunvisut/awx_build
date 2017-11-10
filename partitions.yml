@@ -3,6 +3,17 @@
   become: true
   tasks:
         - name: Create partitions
+        # Read device information (always use unit when probing)
+        - parted: device=/dev/vdc unit=MiB
+          register: sdb_info
+        # Remove all partitions from disk
+        - parted:
+            device: /dev/vdc
+            number: "{{ item.num }}"
+            state: absent
+          with_items:
+           - "{{ sdb_info.partitions }}"
+        # Create partitions
         - parted:
             device: /dev/vdc
             number: 1
