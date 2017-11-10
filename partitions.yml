@@ -13,4 +13,4 @@
         with_items:
           - { device: "/dev/vdc", number: "1", start:  "0%", end:  "50GiB" }
           - { device: "/dev/vdc", number: "2", start:  "51GiB", end: "100GiB" }
-          - { device: "/dev/vdc", number: "3", start: "101GiB", end: "150GiB" }
+          - { device: "/dev/vdc", number: "3", start: "101GiB", end: "100%" }
