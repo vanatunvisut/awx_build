@@ -10,3 +10,4 @@
            - bc
            - ntp
            - jq
+           - parted
