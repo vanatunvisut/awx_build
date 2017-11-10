@@ -1,0 +1,14 @@
+---
+- hosts: all
+  become: true
+  tasks:
+        - name: "Format disk: \"{{ item.device }}\" using etx4"
+          filesystem:
+            dev: "{{ item.device }}"
+            fstype: ext4
+            opts: -cc
+          with_items:
+            - { device: /dev/vdc1 }
+            - { device: /dev/vdc2 }
+            - { device: /dev/vdc3 }
+
