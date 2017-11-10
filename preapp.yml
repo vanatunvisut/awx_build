@@ -3,4 +3,4 @@
   become: true
   tasks:
         - name: "Install jq"
-          apt: pkg=jq state=installed stable=installed
+          apt: pkg=jq state=installed
