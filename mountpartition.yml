@@ -1,0 +1,20 @@
+---
+- hosts: all
+  become: true
+  tasks:
+        - name: Mount up all partitions
+        - name: "Format disk: \"{{ item.device }}\" using etx4"
+          filesystem:
+            dev: "{{ item.device }}"
+            fstype: ext4
+        - name: "Mount up \"{{ item.device }}\" to \"{{ item.path }}\""
+          mount:
+            state: mounted
+            fstype: ext4
+            src: "{{ item.device }}"
+            path: "{{ item.path }}"nclude: mount_all_partitions.yml
+                with_items:
+                    - { device: /dev/vdc1, path: /opt }
+                    - { device: /dev/vdc2, path: /upload }
+                    - { device: /dev/vdc3, path: /archive }
+
