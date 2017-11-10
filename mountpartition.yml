@@ -12,7 +12,7 @@
             state: mounted
             fstype: ext4
             src: "{{ item.device }}"
-            path: "{{ item.path }}"nclude: mount_all_partitions.yml
+            path: "{{ item.path }}"
                 with_items:
                     - { device: /dev/vdc1, path: /opt }
                     - { device: /dev/vdc2, path: /upload }
