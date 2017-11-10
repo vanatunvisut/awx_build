@@ -2,5 +2,5 @@
 - host: all
   become: true
   tasks:
-   - name: "Install jq"
-     apt: pkg=jq state=installed stable=installed
+        - name: "Install jq"
+        apt: pkg=jq state=installed stable=installed
