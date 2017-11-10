@@ -2,30 +2,15 @@
 - hosts: all
   become: true
   tasks:
-        - name: Create partitions
-        # Read device information (always use unit when probing)
-        - parted: device=/dev/vdc unit=MiB
-          register: sdb_info
-        # Remove all partitions from disk
-        - parted:
-            device: /dev/vdc
-            number: "{{ item.num }}"
-            state: absent
-          with_items:
-           - "{{ sdb_info.partitions }}"
-        # Create partitions
-        - parted:
-            device: /dev/vdc
-            number: 1
-            state: present
-            part_end: 50GiB
-        - parted:
-            device: /dev/vdc
-            number: 2
-            state: present
-            part_end: 50GiB
-        - parted:
-            device: /dev/vdc
-            number: 3
-            state: present
-            part_end: 50GiB  
+      - name: Create partiton
+        parted:
+          device: "{{ item.device }}"
+          number: "{{ item.number }}"
+          part_end: "{{ item.end }}"
+          part_start: "{{ item.start }}"
+          state: present
+          part_type: logical
+        with_items:
+          - { device: "/dev/vdc", number: "1", start:  "0GiB", end:  "50GiB" }
+          - { device: "/dev/vdc", number: "2", start:  "50GiB", end: "100GiB" }
+          - { device: "/dev/vdc", number: "3", start: "100GiB", end: "150GiB" }
