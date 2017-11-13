@@ -11,3 +11,13 @@
            - ntp
            - jq
            - parted
+           - python-pip
+           - python-dev
+           - build-essential
+           - plymouth
+           - plymouth-theme-edubuntu
+        - pip: name={{ item }} state=present
+          with_items:
+           - pip
+           - virtualenv
+           - pexpect
